@@ -51,24 +51,25 @@ app.get('/update-cobj', (req, res) => {
 
 app.post('/update-cobj', async (req, res) => {
   try {
-    const { full_name, bio, other, email } = req.body;
+    // تقبل الاسم سواء كانت الحقل اسمه full_name أو name
+    const fullNameValue = req.body.full_name || req.body.name || '';
+    const bioValue = req.body.bio || '';
+    const otherValue = req.body.other || '';
 
-   const body = {
-  properties: {
-    full_name: full_name,
-    bio: bio,
-    other: other,
-    email: email
-  }
-};
-
+    const body = {
+      properties: {
+        full_name: fullNameValue,
+        bio: bioValue,
+        other: otherValue,
+        email: req.body.email || ''
+      }
+    };
 
     await hubspot.post(`/crm/v3/objects/${COBJ}`, body);
 
     res.redirect('/');
-
   } catch (err) {
-    console.error(err.response?.data || err.message);
+    console.error('Error creating record:', err.response?.data || err.message);
     res.status(500).send('Error creating record');
   }
 });

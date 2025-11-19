@@ -51,17 +51,18 @@ app.get('/update-cobj', (req, res) => {
 
 app.post('/update-cobj', async (req, res) => {
   try {
-    // تقبل الاسم سواء كانت الحقل اسمه full_name أو name
+    // قبول القيم سواء كانت مرسلة ك full_name أو ك name (fallback)
     const fullNameValue = req.body.full_name || req.body.name || '';
     const bioValue = req.body.bio || '';
     const otherValue = req.body.other || '';
+    const emailValue = req.body.email || '';
 
     const body = {
       properties: {
         full_name: fullNameValue,
         bio: bioValue,
         other: otherValue,
-        email: req.body.email || ''
+        email: emailValue
       }
     };
 
@@ -73,6 +74,7 @@ app.post('/update-cobj', async (req, res) => {
     res.status(500).send('Error creating record');
   }
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

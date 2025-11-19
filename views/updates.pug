@@ -2,25 +2,25 @@ link(rel="stylesheet", href="/css/style.css")
 doctype html
 html
   head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     title Update Contact
   body
     h1 Update Contact Information
+    a(href='/') Return to the homepage
 
-    form(action="/update" method="POST")
-      label(for="email") Email:
-      input(type="text" name="email" required)
-      br
-
-      label(for="fullName") Full Name:
-      input(type="text" name="fullName" required)
-      br
-
-      label(for="age") Age:
-      input(type="number" name="age" required)
-      br
-
-      label(for="notes") Notes:
-      input(type="text" name="notes")
-      br
-
-      button(type="submit") Update Contact
+    form(action="/update-cobj" method="POST")
+      div
+        label(for="email") Email:
+        input(type="email" name="email" id="email" required)
+      div
+        label(for="full_name") Full Name:
+        input(type="text" name="full_name" id="full_name")
+      div
+        label(for="bio") Bio:
+        input(type="text" name="bio" id="bio")
+      div
+        label(for="other") Other:
+        input(type="text" name="other" id="other")
+      div
+        button(type="submit") Create
